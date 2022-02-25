@@ -1,10 +1,19 @@
-# Rest Server
+# Template Backend-API
+This template has implemented an api for users, registration, authentication, etc, and can be easily extended for other models.
 
-Usar tag en git:
+You can see the swagger api documentation at [api-docs](https://backend-api-dot-fir-pruebas-gustavo.rj.r.appspot.com/api-docs/)
 
-comando: 
-    git tag -a v1.0.0 -m "mi tag fin seccion 8"
+Base url to consume API: "https://backend-api-dot-fir-pruebas-gustavo.rj.r.appspot.com/"
 
-    git push --tags
+Example of API REST in NodeJS , using
+    *Express
+    *JWT
+    *Mongoose
+    *Swagger
 
-    luego en github aprobar el release
+Deployed in Google Cloud Platform, Using:
+    *App Engine Standard
+    *Cloud Build whit CI/CD
+
+Database:
+    *MongoDB Atlas
