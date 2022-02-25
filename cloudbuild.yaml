@@ -1,0 +1,11 @@
+steps:
+  - name: node:14
+    entrypoint: npm
+    args: ["run", "create-env"]
+    env:
+      - 'MONGODB_URI=${_MONGODB_URI}'
+      - 'SECRETORPRIVATEKEY=${_SECRETORPRIVATEKEY}'
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: bash
+    args: [ -c, gcloud app deploy ./app.yaml ]
+timeout: "1600s"

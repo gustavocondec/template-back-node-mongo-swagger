@@ -1,0 +1,13 @@
+# Using Standard App Engine # Flex App Engine use docker
+runtime: nodejs14
+service: backend-api
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
+
+automatic_scaling:
+  max_idle_instances: 1
+  max_instances: 10
+  max_concurrent_requests: 80
+  target_throughput_utilization: 0.95
