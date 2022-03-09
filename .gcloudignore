@@ -18,4 +18,3 @@ node_modules/
 .example.env
 app.yaml
 cloudbuild.yaml
-src
