@@ -1,0 +1,201 @@
+paths:
+  /api/users:
+    get:
+      description: Get List of users
+      tags:
+        - users
+      responses:
+        200:
+          description: Returns a list of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 'Ok'
+                  total:
+                    type: number
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        role:
+                          type: string
+                        isDeleted:
+                          type: boolean
+                        google:
+                          type: boolean
+                        id:
+                          type: string
+
+    post:
+      description: Create user
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - name
+                - password
+                - role
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+            examples:
+              test1:
+                value:
+                  name: 'Gustavo'
+                  email: gustavo1@gmail.com
+                  password: '123456'
+                  role: 'USER_ROLE'
+      responses:
+        200:
+          description: Returns a mysterious string.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 'Ok'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: 'Gustatavo'
+                        email:
+                          type: string
+                          example: 'gustavo1@gmail.com'
+                        role:
+                          type: string
+                          example: 'USER_ROLE'
+                        id:
+                          type: string
+                          example: 1212
+                        google:
+                          type: boolean
+                          example: false
+        400:
+          description: Error request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseError'
+
+  /api/users/{id}:
+    put:
+      description: Edit User
+      tags:
+        - users
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: id of User to edit
+          required: true
+          schema:
+            type: string
+            example:  123456
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'Juan'
+                google:
+                  type: boolean
+                  example: true
+                email:
+                  type: string
+                  example: 'juan@gmail.com'
+                password:
+                  type: string
+                  example: 123456
+      responses:
+        200:
+          description: Returns a mysterious string.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 'Ok'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: 'Gustatavo'
+                        email:
+                          type: string
+                          example: 'gustavo1@gmail.com'
+                        role:
+                          type: string
+                          example: 'USER_ROLE'
+                        id:
+                          type: string
+                          example: 1212
+                        google:
+                          type: boolean
+                          example: false
+        400:
+          description: Error request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseError'
+    delete:
+      description: Delete user
+      tags:
+        - users
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          description: Delete user
+          required: true
+          schema:
+            type: string
+            example: 123456
+      responses:
+        200:
+          description: Confirm delete
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 'ok'

@@ -1,0 +1,11 @@
+/dist
+/src-bex/www
+/src-capacitor
+/src-cordova
+/.quasar
+/node_modules
+/src-ssr
+/src-pwa
+/src-sw
+.eslintrc.js
+jest.config.js

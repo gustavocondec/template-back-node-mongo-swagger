@@ -1,0 +1,44 @@
+paths:
+  /api/auth/login:
+    post:
+      description: Login User return token
+      summary: Login user
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+            examples:
+              test1:
+                value:
+                  email: gustavo1@gmail.com
+                  password: '123456'
+      responses:
+        200:
+          description: Returns a token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 'adaadsdaewfe'
+                  user:
+                    type: object
+        400:
+          description: Error from user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseError'

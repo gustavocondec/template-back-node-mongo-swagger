@@ -1,0 +1,40 @@
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    ResponseOk:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: 'Ok'
+        otherFields:
+          type: string
+          example: 'other fields'
+        data:
+          type: array
+          items:
+            type: object
+
+
+    ResponseError:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: 'Error ...'
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              msg:
+                type: string
+                example: 'Error ...'
+              otherField:
+                type: string
+                example: 'Se puede enviar junto con otros campos'
+security:
+  - BearerAuth: []
