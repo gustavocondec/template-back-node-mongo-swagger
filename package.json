@@ -6,13 +6,11 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.ts",
+    "start": "node dist/index.js",
     "create-env": "printenv > .env",
     "start:tsc": "tsc --watch",
     "dev": "nodemon ./dist/index.js",
-    "build": "tsc && npm run copy:app",
-    "copy:app": "cp app.yaml dist/app.yaml",
-    "copy:files": "cp src/routes/**/*.yaml dist/routes"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",

@@ -10,5 +10,5 @@ steps:
       - 'SECRETORPRIVATEKEY=${_SECRETORPRIVATEKEY}'
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: bash
-    args: [ -c, gcloud app deploy ./dist/app.yaml ]
+    args: [ -c, gcloud app deploy ./app.yaml ]
 timeout: "1600s"
