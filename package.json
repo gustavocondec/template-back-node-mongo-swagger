@@ -40,6 +40,6 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.10.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-import": "^2.25.4"
   }
 }
