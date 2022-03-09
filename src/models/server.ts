@@ -22,16 +22,14 @@ export class Server {
     this.apiUsersPath = '/api/users'
     this.apiAuthPath = '/api/auth'
     this.apiRolesPath= '/api/roles'
-    this.connectMongoDB().then(async () => {
-      await this.connectSql().catch((e) => console.error(e))
-      this.middlewares()
-      this.routes()
-      this.swagger()
-    }
-    )
-
-
+    this.middlewares()
+    this.routes()
+    this.swagger()
     this.handleErrors()
+    void this.connectMongoDB().catch(e => console.error(e))
+    void this.connectSql().catch((e) => console.error(e))
+
+
   }
 
   async connectMongoDB() {
@@ -109,7 +107,7 @@ export class Server {
   }
 
   listen() {
-    this.app.listen(this.port, () => {
+    this.app.listen(Number(this.port), '0.0.0.0', () => {
       console.log('Escuchando en ', this.port)
     })
   }
