@@ -26,10 +26,8 @@ export class Server {
     this.routes()
     this.swagger()
     this.handleErrors()
-    void this.connectMongoDB().catch(e => console.error(e))
-    void this.connectSql().catch((e) => console.error(e))
-
-
+    void this.connectMongoDB().catch(() => console.error('Error conectando a MongoDB'))
+    void this.connectSql().catch(() => console.error('Error conectando a SQL'))
   }
 
   async connectMongoDB() {
@@ -58,7 +56,6 @@ export class Server {
       // apis: ['index.js','./routes/*.js', "./routes/*.yaml"], // files containing annotations as above
     }
     const swaggerDocs = swaggerJsdoc(options)
-    console.log('swagguer',swaggerDocs)
     this.app.use('/api-docs', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocs, {
       explorer: true
     }))
@@ -77,6 +74,7 @@ export class Server {
      * if exist get('/') will be ignored
      */
     this.app.use(express.static('public'))
+
   }
 
   routes() {
@@ -107,7 +105,7 @@ export class Server {
   }
 
   listen() {
-    this.app.listen(Number(this.port), '0.0.0.0', () => {
+    this.app.listen(Number(this.port), () => {
       console.log('Escuchando en ', this.port)
     })
   }
