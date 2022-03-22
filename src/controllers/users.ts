@@ -24,14 +24,13 @@ export const postUsers = async (req: Request, res: Response) => {
 
   // campo google no lo llena el usuario, con destructuracion eliminanmos los campos innecesarios y prohibidos
 
-  const {name, email, role} = req.body
-  let {password} = req.body
+  const {name, email, role, password} = req.body
   // encriptar contraseña
   const salt = bcryptjs.genSaltSync()
-  password = bcryptjs.hashSync(password, salt)
+  const passwordHash = bcryptjs.hashSync(password, salt)
 
 
-  const user = new User({name, email, password, role})
+  const user = new User({name, email, password: passwordHash, role})
   const newUser = await user.save()
 
   res.status(200).send({

@@ -19,7 +19,7 @@ export const isAdminRole = (req:Request, res:Response, next:NextFunction) => {
 }
 
 export const hasRole = (...roles: any[]) => {
-  console.log('ROLES', roles)
+  roles.length
   return (req:Request, res:Response, next:NextFunction) => {
     next()
   }

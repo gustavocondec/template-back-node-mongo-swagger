@@ -4,5 +4,9 @@ import {Server} from './models/server'
 
 const server = new Server()
 
-server.listen()
+const initServer = async () => {
+  await server.initialize()
+  await server.listen()
+}
 
+void initServer()

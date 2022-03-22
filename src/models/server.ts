@@ -10,7 +10,7 @@ import {CustomError} from '../utils/Error';
 import {ResponseError} from '../descriptions/IDescriptions';
 
 export class Server {
-  private app;
+  public app;
   private port: string | number;
   private apiUsersPath: string;
   private apiAuthPath: string;
@@ -22,12 +22,19 @@ export class Server {
     this.apiUsersPath = '/api/users'
     this.apiAuthPath = '/api/auth'
     this.apiRolesPath= '/api/roles'
+  }
+
+  async initialize() {
     this.middlewares()
     this.routes()
     this.swagger()
     this.handleErrors()
-    void this.connectMongoDB().catch(() => console.error('Error conectando a MongoDB'))
-    void this.connectSql().catch(() => console.error('Error conectando a SQL'))
+    await this.connectMongoDB()
+      .then(() => console.log('Conectado a MongoDB'))
+      .catch(() => console.error('Error conectando a MongoDB'))
+    await this.connectSql()
+      .then(() => console.log('Conectado a SQL'))
+      .catch(() => console.error('Error conectando a SQL'))
   }
 
   async connectMongoDB() {
@@ -40,7 +47,6 @@ export class Server {
     await sql.sync({
       alter: true,
     })
-    console.log('Conectado sql')
   }
 
   swagger() {
@@ -104,10 +110,16 @@ export class Server {
     })
   }
 
-  listen() {
-    this.app.listen(Number(this.port), () => {
-      console.log('Escuchando en ', this.port)
+  async listen() {
+    await new Promise((resolve, reject) => {
+      try {
+        this.app.listen(Number(this.port), () => {
+          console.log('Se levanto servidor')
+          resolve('')
+        })
+      } catch (e) {
+        reject(e)
+      }
     })
   }
-
 }
